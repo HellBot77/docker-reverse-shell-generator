@@ -40,6 +40,7 @@ jobs:
         with:
           repository: ${{ env.TAG_GIT_COMMIT }}
           ref: ${{ needs.get-tag.outputs.tag }}
+          path: ${{ env.DOCKERHUB_REPOSITORY }}
       - name: Fetch Dockerfile
         uses: actions/checkout@v4
         with:
