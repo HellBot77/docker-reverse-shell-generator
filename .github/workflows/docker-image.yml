@@ -9,7 +9,7 @@ env:
   PLATFORMS: linux/arm64
   DOCKERHUB_USERNAME: helllord
   DOCKERHUB_REPOSITORY: reverse-shell-generator
-  GIT_COMMIT: 0dayCTF/reverse-shell-generator
+  TAG_GIT_COMMIT: 0dayCTF/reverse-shell-generator
 
 jobs:
   get-tag:
@@ -29,7 +29,7 @@ jobs:
           python-version: 3
       - name: Get Docker image tag
         id: get-tag
-        run: python get_tag.py ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPOSITORY }} --git-commit ${{ env.GIT_COMMIT }} >> $GITHUB_OUTPUT
+        run: python get_tag.py ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPOSITORY }} --git-commit ${{ env.TAG_GIT_COMMIT }} >> $GITHUB_OUTPUT
   build-push:
     needs: get-tag
     if: ${{ needs.get-tag.outputs.tag }}
@@ -38,7 +38,7 @@ jobs:
       - name: Fetch Dockerfile
         uses: actions/checkout@v4
         with:
-          repository: ${{ env.GIT_COMMIT }}
+          repository: ${{ env.TAG_GIT_COMMIT }}
           ref: ${{ needs.get-tag.outputs.tag }}
       - name: Set up Python
         uses: actions/setup-python@v4
