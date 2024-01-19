@@ -35,6 +35,11 @@ jobs:
     if: ${{ needs.get-tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
+      - name: Fetch repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TAG_GIT_COMMIT }}
+          ref: ${{ needs.get-tag.outputs.tag }}
       - name: Fetch Dockerfile
         uses: actions/checkout@v4
         with:
