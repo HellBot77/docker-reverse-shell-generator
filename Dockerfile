@@ -1,9 +1,10 @@
 FROM alpine/git:latest AS build
 
 ARG TAG=-
-RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git &&
-    git -C=reverse-shell-generator checkout ${TAG} &&
-    rm -rf reverse-shell-generator/.git
+RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git
+WORKDIR reverse-shell-generator
+RUN git checkout ${TAG}
+RUN rm -rf .git
 
 FROM pierrezemb/gostatic
 
