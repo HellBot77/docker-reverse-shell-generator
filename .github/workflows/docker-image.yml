@@ -40,12 +40,6 @@ jobs:
         with:
           sparse-checkout: Dockerfile
           sparse-checkout-cone-mode: false
-      - name: Fetch repository
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.TAG_GIT_COMMIT }}
-          ref: ${{ needs.get-tag.outputs.tag }}
-          path: ${{ env.DOCKERHUB_REPOSITORY }}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
