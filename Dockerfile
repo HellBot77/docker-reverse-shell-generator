@@ -1,3 +1,3 @@
-FROM httpd:alpine
+FROM pierrezemb/gostatic
 
-COPY ./reverse-shell-generator /usr/local/apache2/htdocs/
+COPY ./reverse-shell-generator /srv/http
