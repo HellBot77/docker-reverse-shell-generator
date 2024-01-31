@@ -2,8 +2,9 @@ FROM alpine/git AS build
 
 ARG TAG=-
 RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git && \
-    git -C=reverse-shell-generator checkout ${TAG} && \
-    rm -rf reverse-shell-generator/.git
+    cd reverse-shell-generator && \
+    git checkout ${TAG} && \
+    rm -rf .git
 
 FROM pierrezemb/gostatic
 
