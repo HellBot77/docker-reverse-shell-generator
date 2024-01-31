@@ -1,9 +1,9 @@
 FROM alpine/git AS build
 
-ARG TAG=-
+ARG TAG=latest
 RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git && \
     cd reverse-shell-generator && \
-    git checkout ${TAG} && \
+    ([[ "$TAG" = "latest" ]] || git checkout ${TAG}) && \
     rm -rf .git
 
 FROM pierrezemb/gostatic
