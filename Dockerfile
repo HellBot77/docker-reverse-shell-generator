@@ -1,4 +1,4 @@
-FROM alpine/git AS git
+FROM alpine/git AS base
 
 ARG TAG=latest
 RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git && \
@@ -8,5 +8,5 @@ RUN git clone https://github.com/0dayCTF/reverse-shell-generator.git && \
 
 FROM pierrezemb/gostatic
 
-COPY --from=git /git/reverse-shell-generator /srv/http
+COPY --from=base /git/reverse-shell-generator /srv/http
 EXPOSE 8043
